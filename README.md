@@ -85,3 +85,6 @@ npm run dev
 - `postman/PruebaTecnica-Helppeople-AlejandroOsorio.postman_collection.json`
 - `postman/Local-Helppeople.postman_environment.json`
 
+---
+
+NOTA: Para cargar los productos masivamente usar la plantilla que se envuentra en **database/plantilla.xlsx** y reemplazar los valores.

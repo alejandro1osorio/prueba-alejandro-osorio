@@ -111,6 +111,18 @@
           }
         },
         {
+          "name": "Productos - Listar (todos)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/productos/",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productos"]
+            }
+          }
+        },
+
+        {
           "name": "Productos - Crear",
           "request": {
             "method": "POST",
