@@ -47,7 +47,7 @@ DB_USER=root
 DB_PASSWORD=
 DB_NAME=crud-alejandro-osorio
 
-CORS_ORIGIN=http://localhost:5173
+CORS_ORIGIN=http://localhost:5173 # adaptarlo si hace falta
 ```
 
 tambien en frontend
