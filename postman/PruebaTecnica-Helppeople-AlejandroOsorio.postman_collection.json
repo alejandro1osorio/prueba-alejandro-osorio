@@ -1,0 +1,205 @@
+{
+  "info": {
+    "name": "PruebaTecnica Helppeople - Alejandro Osorio",
+    "_postman_id": "e3a2b7e6-0000-0000-0000-000000000001",
+    "description": "Colección para probar la API en local usando {{baseUrl}}",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Categorias",
+      "item": [
+        {
+          "name": "Categorias - Listar",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/categorias",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "categorias"]
+            }
+          }
+        },
+        {
+          "name": "Categorias - Crear",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Periféricos\",\n  \"descripcion\": \"Teclados, mouse, etc.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/categorias",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "categorias"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 201 o 200', function () {",
+                  "  pm.expect([200,201]).to.include(pm.response.code);",
+                  "});",
+                  "",
+                  "// Si tu API devuelve el id en el response, intenta guardarlo",
+                  "try {",
+                  "  const json = pm.response.json();",
+                  "  const id = json.idCategoria || json.id || (json.data && json.data.idCategoria);",
+                  "  if (id) pm.environment.set('idCategoria', String(id));",
+                  "} catch (e) {}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Categorias - Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Periféricos (Editado)\",\n  \"descripcion\": \"Accesorios del computador\",\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/categorias/{{idCategoria}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "categorias", "{{idCategoria}}"]
+            }
+          }
+        },
+        {
+          "name": "Categorias - Eliminar",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/categorias/{{idCategoria}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "categorias", "{{idCategoria}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Productos",
+      "item": [
+        {
+          "name": "Productos - Listar (filtros)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/productos?page=1&pageSize=10&search=teclado&idCategoria=3&precioMin=100&precioMax=500&activo=true&sortBy=precio&sortDir=asc",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productos"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "pageSize", "value": "10" },
+                { "key": "search", "value": "teclado" },
+                { "key": "idCategoria", "value": "3" },
+                { "key": "precioMin", "value": "100" },
+                { "key": "precioMax", "value": "500" },
+                { "key": "activo", "value": "true" },
+                { "key": "sortBy", "value": "precio" },
+                { "key": "sortDir", "value": "asc" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Productos - Crear",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Teclado mecánico\",\n  \"descripcion\": \"Switch azul\",\n  \"precio\": 250,\n  \"idCategoria\": 1,\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/productos",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productos"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status es 201 o 200', function () {",
+                  "  pm.expect([200,201]).to.include(pm.response.code);",
+                  "});",
+                  "",
+                  "try {",
+                  "  const json = pm.response.json();",
+                  "  const id = json.idProducto || json.id || (json.data && json.data.idProducto);",
+                  "  if (id) pm.environment.set('idProducto', String(id));",
+                  "} catch (e) {}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Productos - Obtener por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/productos/{{idProducto}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productos", "{{idProducto}}"]
+            }
+          }
+        },
+        {
+          "name": "Productos - Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Teclado mecánico PRO\",\n  \"descripcion\": \"Switch rojo\",\n  \"precio\": 280,\n  \"idCategoria\": 1,\n  \"activo\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/productos/{{idProducto}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productos", "{{idProducto}}"]
+            }
+          }
+        },
+        {
+          "name": "Productos - Eliminar",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{baseUrl}}/api/productos/{{idProducto}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productos", "{{idProducto}}"]
+            }
+          }
+        },
+        {
+          "name": "Productos - Masivo",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    { \"nombre\": \"Mouse gamer\", \"descripcion\": \"RGB\", \"precio\": 120, \"idCategoria\": 1, \"activo\": true },\n    { \"nombre\": \"Monitor 24\", \"descripcion\": \"IPS\", \"precio\": 650, \"idCategoria\": 1, \"activo\": true }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/productosMasivo",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "productosMasivo"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

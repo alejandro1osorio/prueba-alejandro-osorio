@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 09-01-2026 a las 19:31:15
+-- Tiempo de generación: 09-01-2026 a las 02:44:06
 -- Versión del servidor: 8.4.3
 -- Versión de PHP: 8.3.28
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `crud-alejandro-osorio`
+-- Base de datos: `kagencia_crud-alejandro-osorio`
 --
 
 -- --------------------------------------------------------
@@ -35,19 +35,6 @@ CREATE TABLE `categorias` (
   `fechaCreacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fechaModificacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Volcado de datos para la tabla `categorias`
---
-
-INSERT INTO `categorias` (`idCategoria`, `nombre`, `descripcion`, `activo`, `fechaCreacion`, `fechaModificacion`) VALUES
-(1, 'Bebidas', 'Bebidas alcohólicas y no alcohólicas', b'1', '2026-01-08 23:34:08', '2026-01-09 08:17:25'),
-(2, 'Snacks', 'Productos para consumo rápido', b'1', '2026-01-09 08:18:03', '2026-01-09 08:18:03'),
-(3, 'Aseo Personal', 'Artículos de higiene personal', b'1', '2026-01-09 08:18:17', '2026-01-09 08:18:17'),
-(4, 'Limpieza', 'Productos de limpieza para el hogar', b'1', '2026-01-09 08:19:10', '2026-01-09 08:19:10'),
-(5, 'Mascotas', 'Alimentos y accesorios para mascotas', b'1', '2026-01-09 08:19:38', '2026-01-09 08:19:38'),
-(6, 'otras', 'otras', b'1', '2026-01-09 09:56:38', '2026-01-09 09:57:11'),
-(7, 'Hogar', NULL, b'1', '2026-01-09 10:23:04', '2026-01-09 10:23:04');
 
 -- --------------------------------------------------------
 
@@ -66,21 +53,7 @@ CREATE TABLE `productos` (
   `fechaCreacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `fechaModificacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `idCategoria` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Volcado de datos para la tabla `productos`
---
-
-INSERT INTO `productos` (`idProducto`, `nombre`, `descripcion`, `sku`, `precio`, `stock`, `activo`, `fechaCreacion`, `fechaModificacion`, `idCategoria`) VALUES
-(1, 'Coca Cola', 'Bebida gaseosa', 'BEB-001', 7.00, 100, b'1', '2026-01-08 23:34:43', '2026-01-09 08:23:11', 1),
-(2, 'Galletas Chocolate', NULL, 'SNK-002', 3.00, 60, b'1', '2026-01-09 08:25:01', '2026-01-09 08:25:01', 2),
-(3, 'Shampoo', NULL, 'ASE-001', 20.00, 40, b'1', '2026-01-09 08:26:27', '2026-01-09 08:26:27', 3),
-(4, 'Detergente Líquido', NULL, 'LIM-001', 19.90, 80, b'1', '2026-01-09 08:27:49', '2026-01-09 08:27:49', 4),
-(5, 'Arena para Gato', NULL, 'MAS-002', 39.00, 20, b'1', '2026-01-09 08:29:28', '2026-01-09 08:29:28', 5),
-(6, 'Limpiavidrios', 'Limpiador para superficies de vidri', 'LIM-002', 13200.00, 25, b'1', '2026-01-09 09:21:32', '2026-01-09 09:21:32', 4),
-(7, 'Jabón Corporal', NULL, 'ASE-002', 6500.00, 80, b'1', '2026-01-09 09:21:32', '2026-01-09 09:21:32', 3),
-(8, 'otro', NULL, 'OTR-001', 20000.00, 12, b'1', '2026-01-09 11:04:50', '2026-01-09 11:04:50', 6);
+) ;
 
 --
 -- Índices para tablas volcadas
@@ -113,13 +86,13 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `idCategoria` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idCategoria` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `idProducto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idProducto` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
