@@ -49,7 +49,7 @@ export default function ProductBulkUpload({ onDone }) {
   return (
     <Space>
       <Upload beforeUpload={beforeUpload} showUploadList={false} accept=".csv,.xlsx,.xls">
-        <Button icon={<UploadOutlined />}>Carga masiva (CSV/XLSX)</Button>
+        <Button icon={<UploadOutlined />}>Carga masiva (XLSX)</Button>
       </Upload>
     </Space>
   );

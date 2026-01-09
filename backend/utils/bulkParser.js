@@ -1,17 +1,23 @@
 import fs from "fs/promises";
 import { parse as csvParse } from "csv-parse/sync";
-import * as xlsx from "xlsx";
+import XLSX from "xlsx";
 
 export async function parseBulkFile(filePath, originalName) {
   const lower = originalName.toLowerCase();
 
+  // ✅ XLSX / XLS
   if (lower.endsWith(".xlsx") || lower.endsWith(".xls")) {
-    const wb = xlsx.readFile(filePath);
-    const sheetName = wb.SheetNames[0];
-    const sheet = wb.Sheets[sheetName];
-    return xlsx.utils.sheet_to_json(sheet, { defval: "" });
+    const workbook = XLSX.readFile(filePath);
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+
+    // defval: "" evita undefined en celdas vacías
+    const rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+
+    return rows;
   }
 
+  // ✅ CSV
   if (lower.endsWith(".csv")) {
     const content = await fs.readFile(filePath, "utf8");
     return csvParse(content, {
