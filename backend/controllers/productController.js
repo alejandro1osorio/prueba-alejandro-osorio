@@ -132,7 +132,7 @@ export async function updateProduct(req, res) {
 }
 
 /**
- * ELIMINAR PRODUCTO (SOFT DELETE)
+ * el (soft delete)
  */
 export async function deleteProduct(req, res) {
   const id = Number(req.params.id);
@@ -145,7 +145,7 @@ export async function deleteProduct(req, res) {
 }
 
 /**
- * CARGA MASIVA DE PRODUCTOS (CSV / XLSX)
+ * CARGA MASIVA DE PRODUCTOS (XLSX)
  */
 export async function bulkCreateProducts(req, res) {
   if (!req.file) {
@@ -171,7 +171,6 @@ export async function bulkCreateProducts(req, res) {
       ...result
     });
   } finally {
-    // 🧹 Limpieza del archivo temporal
     await fs.unlink(filePath).catch(() => {});
   }
 }

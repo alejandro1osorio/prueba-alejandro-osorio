@@ -12,7 +12,6 @@ const router = Router();
 router.use("/categorias", categoryRoutes);
 router.use("/productos", productRoutes);
 
-// Endpoint EXACTO del enunciado: POST /api/productosMasivo
 const upload = multer({
   dest: "tmp/",
   limits: { fileSize: 10 * 1024 * 1024 } // 10MB

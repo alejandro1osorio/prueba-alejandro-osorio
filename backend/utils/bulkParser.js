@@ -5,13 +5,12 @@ import XLSX from "xlsx";
 export async function parseBulkFile(filePath, originalName) {
   const lower = originalName.toLowerCase();
 
-  // ✅ XLSX / XLS
+  // XLSX 
   if (lower.endsWith(".xlsx") || lower.endsWith(".xls")) {
     const workbook = XLSX.readFile(filePath);
     const sheetName = workbook.SheetNames[0];
     const sheet = workbook.Sheets[sheetName];
 
-    // defval: "" evita undefined en celdas vacías
     const rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
 
     return rows;

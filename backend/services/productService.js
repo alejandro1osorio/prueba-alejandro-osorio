@@ -38,7 +38,6 @@ export async function softDeleteProduct(id) {
 }
 
 export async function bulkCreateProducts(rows) {
-  // normaliza llaves a lower-case
   const normalized = rows.map((r) => {
     const obj = {};
     for (const [k, v] of Object.entries(r)) obj[String(k).trim().toLowerCase()] = v;
@@ -49,7 +48,7 @@ export async function bulkCreateProducts(rows) {
   const toInsert = [];
 
   normalized.forEach((r, idx) => {
-    const rowNumber = idx + 2; // asumiendo header
+    const rowNumber = idx + 2; 
 
     const nombre = String(r.nombre ?? "").trim();
     const precio = Number(r.precio);

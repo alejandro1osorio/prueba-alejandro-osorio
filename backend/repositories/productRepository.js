@@ -4,7 +4,7 @@ export async function listPaged({ offset, pageSize, filters, sort }) {
   const where = [];
   const params = [];
 
-  // ✅ Filtros parametrizados (seguros)
+  // el filtro parametrizado
   if (filters.search) {
     where.push("p.nombre LIKE ?");
     params.push(`%${filters.search}%`);
@@ -32,7 +32,6 @@ export async function listPaged({ offset, pageSize, filters, sort }) {
 
   const whereSql = where.length ? `WHERE ${where.join(" AND ")}` : "";
 
-  // ✅ sort whitelist (evita inyección)
   const sortMap = {
     nombre: "p.nombre",
     precio: "p.precio",
@@ -44,7 +43,6 @@ export async function listPaged({ offset, pageSize, filters, sort }) {
 
   const orderBy = `${sortMap[safeSortBy]} ${safeSortDir}`;
 
-  // ✅ Blindaje total limit/offset (números) + clamp
   const safeLimit = Number.isFinite(Number(pageSize))
     ? Math.max(1, Math.min(100, parseInt(pageSize, 10)))
     : 10;
@@ -53,14 +51,12 @@ export async function listPaged({ offset, pageSize, filters, sort }) {
     ? Math.max(0, parseInt(offset, 10))
     : 0;
 
-  // total
   const [countRows] = await pool.execute(
     `SELECT COUNT(*) AS total FROM productos p ${whereSql}`,
     params
   );
   const total = Number(countRows[0]?.total || 0);
 
-  // ✅ LIMIT/OFFSET incrustados como int (evita ER_WRONG_ARGUMENTS)
   const itemsSql = `
     SELECT
       p.idProducto,
